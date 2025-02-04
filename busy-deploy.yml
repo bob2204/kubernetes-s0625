@@ -24,3 +24,11 @@ spec:
         env:
           - name: STAGE
             value: Kubernetes
+          - name: PodName
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: HostIP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.hostIP
