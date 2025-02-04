@@ -37,6 +37,11 @@ spec:
               configMapKeyRef:
                 name: busy
                 key: Formateur
+          - name: PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: busy
+                key: Password
         envFrom:
           - configMapRef:
               name: busy
