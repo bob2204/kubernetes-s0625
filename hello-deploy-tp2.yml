@@ -17,3 +17,6 @@ spec:
       containers:
       - image: bob2606/hello-http:0.8.26
         name: hello-http
+        ports:
+          - containerPort: 8080
+            name: hello
