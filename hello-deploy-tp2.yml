@@ -18,5 +18,8 @@ spec:
       - image: bob2606/hello-http:0.8.26
         name: hello-http
         ports:
-          - containerPort: 8080
+          - containerPort: 80
             name: hello
+        envFrom:
+          - configMapRef:
+              name: hello

@@ -1,0 +1,9 @@
+apiVersion: v1
+data:
+  MSG: Dev
+  PORT: "80"
+  VERSION: "0.1"
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: hello
