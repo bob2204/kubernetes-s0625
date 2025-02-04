@@ -32,3 +32,11 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: status.hostIP
+          - name: TEACHER
+            valueFrom:
+              configMapKeyRef:
+                name: busy
+                key: Formateur
+        envFrom:
+          - configMapRef:
+              name: busy
