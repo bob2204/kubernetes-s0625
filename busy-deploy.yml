@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: busy
+  name: busy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: busy
+  template:
+    metadata:
+      labels:
+        app: busy
+    spec:
+      containers:
+      - image: busybox:1.28
+        name: busybox
+        command:
+          - tail
+          - -f 
+          - /dev/null
+        env:
+          - name: STAGE
+            value: Kubernetes
