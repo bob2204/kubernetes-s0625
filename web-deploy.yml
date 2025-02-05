@@ -30,5 +30,14 @@ spec:
             port: 80
           periodSeconds: 5
           failureThreshold: 2
+        volumeMounts:
+          - name: html
+            mountPath: /usr/share/nginx/html
       - image: php:8.2-fpm
         name: php
+
+      volumes:
+        - name: html
+          hostPath:
+            path: /data
+            type: Directory
