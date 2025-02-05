@@ -23,3 +23,15 @@ spec:
         envFrom:
           - configMapRef:
               name: hello
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 80
+          periodSeconds: 5
+          failureThreshold: 3
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 80
+          periodSeconds: 15
+          failureThreshold: 2
