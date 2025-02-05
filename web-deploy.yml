@@ -18,5 +18,17 @@ spec:
       containers:
       - image: nginx:1.26
         name: nginx
+        readinessProbe:
+          httpGet:
+            path: /index.html
+            port: 80
+          periodSeconds: 2
+          failureThreshold: 2
+        livenessProbe:
+          httpGet:
+            path: /index.html
+            port: 80
+          periodSeconds: 5
+          failureThreshold: 2
       - image: php:8.2-fpm
         name: php
