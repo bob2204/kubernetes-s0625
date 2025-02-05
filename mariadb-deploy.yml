@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mariadb
+  name: mariadb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mariadb
+  template:
+    metadata:
+      labels:
+        app: mariadb
+    spec:
+      containers:
+      - image: mariadb:10.8
+        name: mariadb
+#       env:
+#         - name: MARIADB_ROOT_PASSWORD
+#            value: azerty
+#         - name: MARIADB_DATABASE
+#           value: stage
+        envFrom:
+          - configMapRef:
+              name: mariadb
+          - secretRef:
+              name: mariadb
