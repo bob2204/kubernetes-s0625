@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   annotations:
     kubernetes.io/change-cause: v0.8.27
@@ -16,23 +16,6 @@ spec:
       labels:
         app: hello
     spec:
-      initContainers:
-      - image: busybox:1.28
-        name: prep-status
-        volumeMounts:
-          - name: status
-            mountPath: /mnt
-        command:
-          - sh
-          - -c
-          - |
-            nb=$(hostname|cut -d- -f2)
-            if [ $nb = "0" ]
-            then
-              echo Primaire > /mnt/status
-            else
-              echo Secondaire $nb > /mnt/status
-            fi
       containers:
       - image: bob2606/hello-http:0.8.27
         name: hello-http
@@ -55,10 +38,12 @@ spec:
           periodSeconds: 15
           failureThreshold: 2
         volumeMounts:
-          - name: status
+          - name: data
             mountPath: /var/lib/hello-http
+            subPath: hello
 
       volumes:
-        - name: status
-          emptyDir:
-            medium: Memory
+        - name: data
+          nfs:
+            server: 192.168.56.250
+            path: /
