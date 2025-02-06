@@ -1328,3 +1328,4 @@ kind: ConfigMap
 metadata:
   creationTimestamp: null
   name: redis-cm
+  namespace: redis
