@@ -33,6 +33,7 @@ spec:
         volumeMounts:
           - name: html
             mountPath: /usr/share/nginx/html
+            subPath: html
           - name: nginx-config
             mountPath: /etc/nginx/conf.d/
       - image: php:8.2-fpm
@@ -40,12 +41,13 @@ spec:
         volumeMounts:
           - name: html
             mountPath: /var/www/html
+            subPath: html
 
       volumes:
         - name: html
-          hostPath:
-            path: /data
-            type: Directory
+          nfs:
+            server: 192.168.56.250
+            path: /
         - name: nginx-config
           configMap:
             name: nginx
