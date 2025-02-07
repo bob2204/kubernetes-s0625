@@ -1,27 +1,28 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
   name: helloweb
 spec:
   ingressClassName: nginx
   rules:
-  - host: hello.stage
-    http:
+  - http:
       paths:
       - backend:
           service:
             name: hello
             port:
               number: 80
-        path: /
-        pathType: Prefix
-  - host: web.stage
-    http:
+        path: /hello($|/)(.*)
+        pathType: ImplementationSpecific
+  - http:
       paths:
       - backend:
           service:
             name: web
             port:
               number: 80
-        path: /
-        pathType: Prefix
+        path: /web($|/)(.*)
+        pathType: ImplementationSpecific
