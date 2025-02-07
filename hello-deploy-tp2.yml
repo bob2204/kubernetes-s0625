@@ -41,6 +41,9 @@ spec:
           - name: data
             mountPath: /var/lib/hello-http
             subPath: hello
+        resources:
+          limits:
+            cpu: 10m
 
       volumes:
         - name: data
